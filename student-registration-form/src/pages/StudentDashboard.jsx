@@ -1,12 +1,15 @@
-// src/pages/StudentDashboard.js
+// src/components/Dashboard.jsx
+import React, { useState, useEffect } from 'react';
 
-import React from 'react';
+const StudentDashboard = () => {
+  const [formData, setFormData] = useState({});
+  
+  return (
+    <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
+      <h1 className="text-3xl text-gray-600 font-semibold mb-6 text-center">Student Dashboard</h1>
 
-const StudentDashboard = ({ studentData }) => (
-  <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
-    <h1 className="text-3xl font-bold mb-6 text-center">Student Dashboard</h1>
-    {/* Display student details in a simple form layout here */}
-  </div>
-);
+    </div>
+  );
+};
 
 export default StudentDashboard;

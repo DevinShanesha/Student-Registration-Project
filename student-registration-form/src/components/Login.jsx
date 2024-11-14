@@ -1,10 +1,11 @@
 // src/components/Login.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 const Login = () => {
+  const [candidateName, setCandidateName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [dob, setDob] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -18,22 +19,14 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json', 
         },
-        body: JSON.stringify({ email, password, isAdmin }),
+        body: JSON.stringify({candidateName, email, dob}),
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // Save token and role in localStorage or state
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('role', isAdmin ? 'admin' : 'student');
-
-        // Redirect to the respective dashboard
-        if (isAdmin) {
-          navigate('/admin/dashboard');
-        } else {
-          navigate('/student/dashboard');
-        }
+      const formData = await response.json();
+      console.log(formData);
+      
+      if (response.status == 200) {
+          navigate('/student/dashboard', {state : {fetchedData : formData}});
       } else {
         setError(data.message || 'Login failed. Please try again.');
       }
@@ -50,6 +43,17 @@ const Login = () => {
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
         <form onSubmit={handleLogin}>
+
+          <label className="block mb-2 text-gray-700">Name</label>
+          <input
+            type="text"
+            className="border border-gray-300 p-2 rounded w-full mb-4"
+            placeholder="Enter your name"
+            value={candidateName}
+            onChange={(e) => setCandidateName(e.target.value)}
+            required
+          />
+          
           <label className="block mb-2 text-gray-700">Email</label>
           <input
             type="email"
@@ -60,13 +64,13 @@ const Login = () => {
             required
           />
 
-          <label className="block mb-2 text-gray-700">Password</label>
+          <label className="block mb-2 text-gray-700">Email</label>
           <input
-            type="password"
+            type="date"
             className="border border-gray-300 p-2 rounded w-full mb-4"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your DOB"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
             required
           />
 
