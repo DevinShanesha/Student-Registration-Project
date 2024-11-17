@@ -16,6 +16,7 @@ const PersonalDetailsForm = ({ formData, setFormData }) => {
       <h2 className="text-2xl text-gray-600 font-semibold mb-4">Personal Details</h2>
 
       <input
+        required
         type="text"
         placeholder="Candidate's Name"
         value={formData.candidateName || ''}
@@ -54,6 +55,7 @@ const PersonalDetailsForm = ({ formData, setFormData }) => {
       </div>
 
       <input
+        required
         type="date"
         placeholder="Date of Birth"
         value={formData.dob || ''}
@@ -62,6 +64,7 @@ const PersonalDetailsForm = ({ formData, setFormData }) => {
       />
 
       <input
+        required
         type="tel"
         placeholder="Mobile Number"
         value={formData.mobile || ''}
@@ -75,6 +78,7 @@ const PersonalDetailsForm = ({ formData, setFormData }) => {
       />
 
       <input
+        required
         type="email"
         placeholder="Email ID"
         value={formData.email || ''}
